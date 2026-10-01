@@ -1,0 +1,6 @@
+username	city	title	created_at
+alex	Charlottesville	Welcome to the lab	2026-09-11 09:00:00
+maya	Charlottesville	SQL practice	2026-09-11 10:00:00
+noah	Charlottesville	Python and SQL	2026-09-13 13:00:00
+oliver	Charlottesville	Group by practice	2026-09-14 15:00:00
+ethan	Charlottesville	Query practice	2026-09-15 17:00:00

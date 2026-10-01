@@ -1,0 +1,14 @@
+[project]
+name = "sql_lab"
+version = "0.1.0"
+description = "sql work for DS2022"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mysql-connector-python",
+    "pandas",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
