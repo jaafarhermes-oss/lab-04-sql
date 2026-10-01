@@ -30,7 +30,7 @@ def get_data_by_group(value):
         connection = get_connection()
         cursor = connection.cursor(dictionary=True)
 
-        query = 
+        query = "SELECT * FROM mock WHERE `group` = %s"
         cursor.execute(query, (value,))
         rows = cursor.fetchall()
 
@@ -62,8 +62,7 @@ def plot_counts(groupby):
 
         if groupby not in valid_columns:
             raise ValueError(f"Invalid column name: {groupby}")
-
-        query = 
+        query = f"SELECT `{groupby}`, COUNT(*) FROM mock GROUP BY `{groupby}`"
         cursor.execute(query)
         rows = cursor.fetchall()
 
