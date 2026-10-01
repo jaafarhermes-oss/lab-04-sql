@@ -1,4 +1,4 @@
-"""Query the uploaded mock table in MySQL."""
+
 
 import logging
 import os
@@ -14,7 +14,6 @@ DBNAME = os.getenv("DBNAME")
 
 
 def get_connection():
-    """Open and return a MySQL database connection."""
     return mysql.connector.connect(
         host=DBHOST,
         user=DBUSER,
@@ -24,7 +23,6 @@ def get_connection():
 
 
 def get_data_by_group(value):
-    """Return rows where the `group` column equals the supplied value."""
     connection = None
     cursor = None
 
@@ -32,11 +30,7 @@ def get_data_by_group(value):
         connection = get_connection()
         cursor = connection.cursor(dictionary=True)
 
-        query = """
-            SELECT *
-            FROM mock
-            WHERE `group` = %s
-        """
+        query = 
         cursor.execute(query, (value,))
         rows = cursor.fetchall()
 
@@ -55,7 +49,6 @@ def get_data_by_group(value):
 
 
 def plot_counts(groupby):
-    """Count rows for each distinct value of a validated column."""
     connection = None
     cursor = None
 
@@ -63,20 +56,14 @@ def plot_counts(groupby):
         connection = get_connection()
         cursor = connection.cursor()
 
-        # Column names cannot be passed as normal SQL parameters.
-        # Validate the requested column against the actual table columns first.
+
         cursor.execute("SHOW COLUMNS FROM mock")
         valid_columns = {row[0] for row in cursor.fetchall()}
 
         if groupby not in valid_columns:
             raise ValueError(f"Invalid column name: {groupby}")
 
-        query = f"""
-            SELECT `{groupby}`, COUNT(*) AS count
-            FROM mock
-            GROUP BY `{groupby}`
-            ORDER BY count DESC
-        """
+        query = 
         cursor.execute(query)
         rows = cursor.fetchall()
 
@@ -95,7 +82,6 @@ def plot_counts(groupby):
 
 
 def main():
-    """Demonstrate the required database query functions."""
     rows = get_data_by_group("alpha")
     print("Rows in group 'alpha':")
     for row in rows[:5]:
