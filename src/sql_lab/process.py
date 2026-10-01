@@ -1,4 +1,4 @@
-"""Load MOCK_DATA.csv into a MySQL database."""
+
 
 import logging
 import os
@@ -15,7 +15,6 @@ DBNAME = os.getenv("DBNAME")
 
 
 def read_data(filename):
-    """Read a CSV file into a pandas DataFrame."""
     logging.info("Reading data from %s", filename)
     data = pd.read_csv(filename)
     logging.info("Read %d rows.", len(data))
@@ -23,7 +22,6 @@ def read_data(filename):
 
 
 def clean_data(data):
-    """Remove rows with missing values and return the cleaned DataFrame."""
     logging.info("Cleaning data.")
     cleaned = data.dropna().copy()
     logging.info("Rows after cleaning: %d", len(cleaned))
@@ -31,7 +29,6 @@ def clean_data(data):
 
 
 def get_sql_type(dtype):
-    """Map a pandas dtype to a MySQL data type."""
     dtype_name = str(dtype)
 
     type_mapping = {
@@ -48,7 +45,6 @@ def get_sql_type(dtype):
 
 
 def load_data(data, table):
-    """Create the destination table if needed and insert each row."""
     logging.info("Connecting to MySQL database %s.", DBNAME)
 
     connection = None
@@ -63,7 +59,7 @@ def load_data(data, table):
         )
         cursor = connection.cursor()
 
-        # Build the CREATE TABLE statement from the DataFrame schema.
+
         columns = []
         for column in data.columns:
             sql_type = get_sql_type(data[column].dtype)
@@ -77,7 +73,7 @@ def load_data(data, table):
         """
         cursor.execute(create_sql)
 
-        # Parameterized INSERT protects values from SQL injection.
+
         column_names = ", ".join(
             f"`{column.replace('`', '``')}`" for column in data.columns
         )
@@ -109,7 +105,6 @@ def load_data(data, table):
 
 
 def main():
-    """Read, clean, and load the mock data."""
     data = read_data("MOCK_DATA.csv")
     cleaned = clean_data(data)
     load_data(cleaned, "mock")
