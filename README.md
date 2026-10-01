@@ -72,6 +72,3 @@ Finally:
 uv run python src/sql_lab/query.py
 ```
 
-## Note
-
-The course database is student-specific, so the SQL scripts that connect to MySQL must be run with your own UVA computing ID. The local files are ready, but I cannot truthfully claim the remote database execution succeeded until you run those commands.
