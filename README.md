@@ -1,6 +1,5 @@
 # Lab 04: Working with SQL
 
-
 ## Case Study 1
 
 ```bash
